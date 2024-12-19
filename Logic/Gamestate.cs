@@ -4,6 +4,10 @@ public class Gamestate
 {
     public int Goal { get; set; }
     public int CurrentPlayerTurn { get; set; }
+    public int Team1Score { get; set; } = 0;
+    public bool Team1Won => Team1Score >= Goal;
+    public int Team2Score { get; set; } = 0;
+    public bool Team2Won => Team2Score >= Goal;
     public int Turn { get; set; } = 0;
     public int Bet { get; set; } = 1;
     public Deck Deck { get; set; } = new();
