@@ -13,9 +13,10 @@ public class Program
     public static async Task Main(string[] args)
     {
         Console.Clear();
+        Console.WriteLine("Server started");
         _tcpListener.Start();
         _ = AcceptClientsAsync(_tcpListener);
-        Console.WriteLine("Server started");
+        Console.WriteLine($"Server listening on {_tcpListener.LocalEndpoint}");
         _ = IOLoopAsync(_tcpListener);
     }
     
@@ -54,7 +55,7 @@ public class Program
         }
         finally
         {
-            Console.WriteLine("Client disconnected {client.Client.RemoteEndPoint}");
+            Console.WriteLine($"Client disconnected {client.Client.RemoteEndPoint}");
             _clients.Remove(client);
             client.Close();
         }
@@ -78,6 +79,7 @@ public class Program
                     await CloseClientsAsync();
                     tcpListener.Start();
                     Console.WriteLine("Server rebooted");
+                    _serverIsRunning = true; //Ver por que se pone en false!!!
                     break;
                 case "users" or "u":
                     Console.WriteLine($"Connected users: {_clients.Count}");
