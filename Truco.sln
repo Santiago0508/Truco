@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{5B65B243-6676-4CCB-AC72-D880678EA2CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communication", "Communication\Communication.csproj", "{A1A185D4-5970-47A7-BA50-2DCA3BB5055C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{5B65B243-6676-4CCB-AC72-D880678EA2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B65B243-6676-4CCB-AC72-D880678EA2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B65B243-6676-4CCB-AC72-D880678EA2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A185D4-5970-47A7-BA50-2DCA3BB5055C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A185D4-5970-47A7-BA50-2DCA3BB5055C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A185D4-5970-47A7-BA50-2DCA3BB5055C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A185D4-5970-47A7-BA50-2DCA3BB5055C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

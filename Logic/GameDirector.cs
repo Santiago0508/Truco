@@ -10,6 +10,7 @@ public class GameDirector(int goal, int players)
         while (!GameIsOver)
         {
             Gamestate.StartTurn();
+            var turnCardResolver = new TurnCardResolver(Gamestate);
             // var action = Play(Gamestate.Players[Gamestate.CurrentPlayerTurn]);
         }
 

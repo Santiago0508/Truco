@@ -3,40 +3,31 @@ namespace Logic;
 public class TurnCardResolver
 {
     private Card _muestra;
-    private Card[] _hand1;
-    private Card[] _hand2;
+    private List<Player> players;
     
     public TurnCardResolver(Gamestate gamestate)
     {
         _muestra = gamestate.Muestra;
-        _hand1 = gamestate.Players[0].Hand;
-        _hand2 = gamestate.Players[1].Hand;
+        players = gamestate.Players;
     }
     
-    public int CompareCards(int player1CardIndex, int player2CardIndex)
+    public int CompareCards(int player1, int player2, int player1CardIndex, int player2CardIndex)
     {
-        var card1 = _hand1[player1CardIndex];
-        var card2 = _hand2[player2CardIndex];
-        var card1Power = CardPower(card1);
-        var card2Power = CardPower(card2);
+        player1--;
+        player2--;
+        var card1Power = CardPower(players[player1].Hand[player1CardIndex]);
+        var card2Power = CardPower(players[player2].Hand[player2CardIndex]);
         if (card1Power > card2Power) return 1;
         return card1Power < card2Power ? -1 : 0;
     }
 
-    public int EnvidoPlayer1()
+    public int Envido(int player)
     {
-        if(HasFlor(_hand1)) throw new InvalidOperationException("No se puede cantar envido con flor");
-        if(HasPieza(_hand1)) return EnvidoPieza(_hand1);
-        if(DoubleSuit(_hand1)) return EnvidoDoubles(_hand1);
-        return EnvidoSingles(_hand1);
-    }
-    
-    public int EnvidoPlayer2()
-    {
-        if(HasFlor(_hand2)) throw new InvalidOperationException("No se puede cantar envido con flor");
-        if(HasPieza(_hand2)) return EnvidoPieza(_hand2);
-        if(DoubleSuit(_hand2)) return EnvidoDoubles(_hand2);
-        return EnvidoSingles(_hand2);
+        player--;
+        if (HasFlor(players[player].Hand)) throw new InvalidOperationException("No se puede cantar envido con flor");
+        if (HasPieza(players[player].Hand)) return EnvidoPieza(players[player].Hand);
+        if (DoubleSuit(players[player].Hand)) return EnvidoDoubles(players[player].Hand);
+        return EnvidoSingles(players[player].Hand);
     }
     
     private int CardPower(Card card)
