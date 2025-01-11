@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices.JavaScript;
+using Communication;
 
 namespace Client;
 
@@ -18,10 +19,17 @@ class Program
     {
         Console.Clear();
         _tcpClient = CreateTcpClient();
-        Console.WriteLine("Connected to the server");
         while (_running)
         {
-            // Do your thing
+            try
+            {
+                var gameFlow = new GameFlow(_tcpClient);
+                gameFlow.Run();
+            }
+            catch (Exception)
+            {
+                // Handle exception
+            }
         }
     }
 

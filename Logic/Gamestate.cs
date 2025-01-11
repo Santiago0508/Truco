@@ -12,7 +12,7 @@ public class Gamestate
     public int Bet { get; set; } = 1;
     public Deck Deck { get; set; } = new();
     public Card Muestra { get; set; }
-    public List<Player> Players { get; set; }
+    public List<Player> Players { get; set; } = [];
     
     
     public Gamestate(int goal, int players)
@@ -33,7 +33,7 @@ public class Gamestate
         Deck.Shuffle();
         for(var i = 0; i < Players.Count; i++)
         {
-            Players[i].Hand = Deck.Hand(i);
+            Players[i].Hand = Deck.Hand(i+1);
         }
         Muestra = Deck.Muestra(Players.Count);
     }

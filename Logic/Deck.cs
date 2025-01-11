@@ -4,12 +4,12 @@ namespace Logic;
 
 public class Deck
 {
-    private readonly int _deckSize = 40;
+    private const int DeckSize = 40;
     private Card[] Cards { get; }
 
     public Deck()
     {
-        Cards = new Card[_deckSize];
+        Cards = new Card[DeckSize];
         var suits = new[] { "Espada", "Basto", "Oro", "Copa" };
         var numbers = new[] { 1, 2, 3, 4, 5, 6, 7, 10, 11, 12 };
         int pos = 0;
@@ -26,9 +26,9 @@ public class Deck
     public void Shuffle()
     {
         var random = new Random();
-        for (var i = 0; i < _deckSize; i++)
+        for (var i = 0; i < DeckSize; i++)
         {
-            var j = random.Next(i, _deckSize);
+            var j = random.Next(i, DeckSize);
             (Cards[i], Cards[j]) = (Cards[j], Cards[i]);
         }
     }

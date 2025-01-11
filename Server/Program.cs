@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using Logic;
 
 namespace Server;
 
@@ -43,10 +42,19 @@ public class Program
         try
         {
             Console.WriteLine($"Client connected: {client.Client.RemoteEndPoint}");
-            GameDirector gameDirector = new GameDirector(40, 2);
+            // GameDirector gameDirector = new GameDirector(40, 2);
             while (_serverIsRunning)
             {
-                //handle client
+                try
+                {
+                    var gameFlow = new GameFlow(client);
+                    gameFlow.Run();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
         }
         catch (Exception)
