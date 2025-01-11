@@ -35,10 +35,12 @@ public class GameFlow(TcpClient client)
         _communicationHandler.SendEvent(CommunicationHandler.ServerSideEvents.UserTurn);
         ReceiveAck();
         var hand = _gamestate.Players[0].Hand;
+        var muestra = _gamestate.Muestra;
+        var packedData = (muestra.Id << 18) | (hand[0].Id << 12) | (hand[1].Id << 6) | hand[2].Id;
         var handData = new byte[3];
-        handData[0] = (byte)hand[0].Id;
-        handData[1] = (byte)hand[1].Id;
-        handData[2] = (byte)hand[2].Id;
+        handData[0] = (byte)((packedData >> 16) & 0xFF);
+        handData[1] = (byte)((packedData >> 8) & 0xFF);
+        handData[2] = (byte)(packedData & 0xFF);
         _communicationHandler.Send(handData);
         ReceiveAck();
     }

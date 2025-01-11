@@ -46,15 +46,26 @@ public class GameFlow(TcpClient client)
             // Handle error
         }
         SendAck();
-        var hand = _communicationHandler.Receive(3);
+        
+        var handData = _communicationHandler.Receive(3);
         SendAck();
-        var card1 = DecodeCard(hand[0]);
-        var card2 = DecodeCard(hand[1]);
-        var card3 = DecodeCard(hand[2]);
+        
+        DecodeHand(handData, out var muestra, out var card1, out var card2, out var card3);
+
+        Console.WriteLine($"Muestra: {muestra}");
         Console.WriteLine("Mano:");
-        Console.WriteLine('\t' + card1);
-        Console.WriteLine('\t' + card2);
-        Console.WriteLine('\t' + card3);
+        Console.WriteLine("[1] " + card1);
+        Console.WriteLine("[2] " + card2);
+        Console.WriteLine("[3] " + card3);
+    }
+
+    private void DecodeHand(byte[] handData, out string muestra, out string card1, out string card2, out string card3)
+    {
+        var packedData = (handData[0] << 16) | (handData[1] << 8) | handData[2];
+        muestra = DecodeCard((packedData >> 18) & 0x3F);
+        card1 = DecodeCard((packedData >> 12) & 0x3F);
+        card2 = DecodeCard((packedData >> 6) & 0x3F);
+        card3 = DecodeCard(packedData & 0x3F);
     }
 
     private string DecodeCard(int id)
